@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Database\Factories\StoreFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Store extends Model
 {
+    /** @use HasFactory<StoreFactory> */
     use HasFactory;
 
     protected $fillable = [

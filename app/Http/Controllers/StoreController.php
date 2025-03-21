@@ -57,7 +57,7 @@ class StoreController extends Controller
             'postcode' => 'required|string|exists:postcodes,postcode',
         ]);
 
-        $postcode = Postcode::where('postcode', "SW1A1AA")->firstOrFail();
+        $postcode = Postcode::where('postcode', $validated['postcode'])->firstOrFail();
         $latitude = $postcode->latitude;
         $longitude = $postcode->longitude;
 
@@ -69,7 +69,7 @@ class StoreController extends Controller
                                     * sin( radians( latitude ) ) ) ) AS distance", [
                                         $latitude, $longitude, $latitude
                                     ])
-                                    ->having('distance', '<=', \DB::raw('max_delivery_distance'))
+                                    ->having('distance', '<=', 'max_delivery_distance')
                                     ->orderBy('distance')
                                     ->get();
 
